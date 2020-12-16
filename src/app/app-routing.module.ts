@@ -13,22 +13,23 @@ import { ConfirmComponent } from './modules/confirm/confirm.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LogInComponent } from './modules/log-in/log-in.component';
+import { AuthGuard }from './_helpers/auth.guard'
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'book', component: BookListComponent },
+  { path: 'book-list', component: BookListComponent },
   { path: 'book/:id', component: BookDetailComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'about-us', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'blog/:id', component: BlogDetailComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'check-out', component: CheckoutComponent },
-  { path: 'confirm', component: ConfirmComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'check-out', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'confirm', component: ConfirmComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LogInComponent},
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
