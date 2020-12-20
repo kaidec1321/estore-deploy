@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/_models/book';
 import { Image } from 'src/app/_models/image';
 import { GlobalService } from 'src/app/_services/global.service';
+import "owl.carousel/dist/owl.carousel.min";
 
 @Component({
   selector: 'app-book-detail',

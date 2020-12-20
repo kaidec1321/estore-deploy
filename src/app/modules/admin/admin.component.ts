@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Book } from 'src/app/_models/book';
+import { AddEditBookComponent } from '../add-edit-book/add-edit-book.component';
 
 @Component({
   selector: 'app-admin',
@@ -19,15 +21,10 @@ export class AdminComponent implements OnInit {
   changeState(state) {
     this.currentState = state;
   }
+  addNew() {
+    this.dialog.open(AddEditBookComponent, {
+      data: {}
+    });
+  }
 
-}
-
-
-
-@Component({
-  selector: 'dialog-add-book-dialog',
-  templateUrl: 'dialog-add-book-dialog.html',
-})
-export class DialogAddBookDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Book) {}
 }

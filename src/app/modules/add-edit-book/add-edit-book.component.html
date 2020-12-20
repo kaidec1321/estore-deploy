@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Add new book</h1>
+<div mat-dialog-content>
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+        <label>Name</label>
+        <input type="text" class="input--style-3" formControlName="name" placeholder="Book Name"/>
+        </div>
+        <div class="input-group">
+        <label>Author</label>
+        <input type="text" class="input--style-3" formControlName="author" placeholder="Author"/>
+        </div>
+        <div class="input-group">
+        <label>Description</label>
+            <input type="email" class="input--style-3" formControlName="description" placeholder="Desription"/>
+        </div>
+        <div class="input-group">
+            <label>Publisher</label>
+            <input type="text" class="input--style-3" formControlName="publisher" placeholder="Publisher"/>
+        </div>
+        <div class="input-group">
+        <label>Number of Pages</label>
+        <input type="number" min="20" class="input--style-3" formControlName="noOfPage" placeholder="Number Of Page"/>
+        </div>
+        <div class="p-t-10">
+            <button type="submit" name="submit" id="submit" class="btn btn--pill btn--green" >
+                Upload
+            </button>
+        </div>
+    </form>
+</div>
