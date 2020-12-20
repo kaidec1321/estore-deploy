@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Book } from 'src/app/_models/book';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +11,7 @@ export class AdminComponent implements OnInit {
 
   currentState: number = 0;
   title: string[] = ['Books List', 'Orders List', 'Users List'];
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -18,4 +20,14 @@ export class AdminComponent implements OnInit {
     this.currentState = state;
   }
 
+}
+
+
+
+@Component({
+  selector: 'dialog-add-book-dialog',
+  templateUrl: 'dialog-add-book-dialog.html',
+})
+export class DialogAddBookDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Book) {}
 }

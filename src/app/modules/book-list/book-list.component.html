@@ -50,9 +50,9 @@
             <div class="col-md-8">
                 <div class="product_list">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6" *ngFor="let item of bookDataOrigin" (click)="openBookDetail(item.id)">
+                        <div class="col-lg-6 col-sm-6" style="cursor: pointer;" *ngFor="let item of bookDataOrigin" (click)="openBookDetail(item.id)">
                             <div class="single_product_item">
-                                <img src="{{item.bookImages[0].imageSrc}}" alt="" class="img-fluid">
+                                <img src="{{item.bookImages.length ? item.bookImages[0].imageSrc : 'assets/img/categori/product2.png'}}" alt="" class="img-fluid" style="width: 100%">
                                 <h3> <a>{{item.title}}</a> </h3>
                                 <h4>{{item.author}}</h4>
                                 <p>From {{item.pricePerUnit}} VND</p>

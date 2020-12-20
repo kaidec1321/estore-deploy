@@ -31,14 +31,16 @@ export class BookListComponent implements OnInit {
         $(this).addClass('active').siblings().removeClass('active');
       }); 
     });
-
+    this.globalService.announceLoading(true);
     this.globalService.getBookList().subscribe(data => {
       this.bookDataShow = this.bookDataOrigin = data; 
+      this.globalService.announceLoading(false);
     });
 
     this.globalService.getAllCategory().subscribe(data => {
       this.category = data.data;
-    })
+    });
+    
   }
 
   openBookDetail(id) {

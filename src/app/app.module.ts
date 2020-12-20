@@ -24,6 +24,7 @@ import { FooterComponent } from './common/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GlobalService } from './_services/global.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { GlobalService } from './_services/global.service';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

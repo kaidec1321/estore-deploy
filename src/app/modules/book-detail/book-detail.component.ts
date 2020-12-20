@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/_models/book';
+import { Image } from 'src/app/_models/image';
 import { GlobalService } from 'src/app/_services/global.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { GlobalService } from 'src/app/_services/global.service';
 export class BookDetailComponent implements OnInit {
   id: string;
   bookDetail: Book;
+  image: Image[] = [];
 
   constructor(private globalService: GlobalService,
     private router: Router,
@@ -19,8 +21,11 @@ export class BookDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.globalService.announceLoading(true);
     this.globalService.getBook(this.id).subscribe(data => {
-      this.bookDetail = data;
+      this.bookDetail = data[0];
+      this.image = this.bookDetail.bookImages;
+      this.globalService.announceLoading(false);
     });
   }
 
