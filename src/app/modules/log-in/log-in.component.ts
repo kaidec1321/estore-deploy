@@ -51,6 +51,7 @@ export class LogInComponent implements OnInit {
         next: () => {
           // get return url from route parameters or default to '/'
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          
           this.router.navigate([returnUrl]);
         },
         error: error => {

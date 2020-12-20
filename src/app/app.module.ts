@@ -23,6 +23,7 @@ import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GlobalService } from './_services/global.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
+    fakeBackendProvider,
+    GlobalService
   ],
   bootstrap: [AppComponent]
 })

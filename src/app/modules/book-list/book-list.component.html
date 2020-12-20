@@ -1,6 +1,6 @@
 <div class="slider-area ">
     <!-- Mobile Menu -->
-    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+    <div class="single-slider slider-height2 d-flex align-items-center" style="background-image: url(assets/img/hero/category.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -21,19 +21,16 @@
             <div class="col-md-4">
                 <div class="product_sidebar">
                     <div class="single_sedebar">
-                        <form action="#">
+                        <div>
                             <input type="text" name="#" placeholder="Search keyword">
                             <i class="ti-search"></i>
-                        </form>
+                        </div>
                     </div>
                     <div class="single_sedebar">
                         <div class="select_option">
                             <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
                             <div class="select_option_dropdown">
-                                <p><a href="#">Category 1</a></p>
-                                <p><a href="#">Category 2</a></p>
-                                <p><a href="#">Category 3</a></p>
-                                <p><a href="#">Category 4</a></p>
+                                <p><a href="#" *ngFor="let item of category">{{ category.name }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -53,12 +50,12 @@
             <div class="col-md-8">
                 <div class="product_list">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-sm-6" *ngFor="let item of bookDataOrigin" (click)="openBookDetail(item.id)">
                             <div class="single_product_item">
-                                <img src="assets/img/categori/product6.png" alt="" class="img-fluid">
-                                <h3> <a href="single-product.html">Gone with the wind</a> </h3>
-                                <h4>Margaret Mitchell</h4>
-                                <p>From $5</p>
+                                <img src="{{item.bookImages[0].imageSrc}}" alt="" class="img-fluid">
+                                <h3> <a>{{item.title}}</a> </h3>
+                                <h4>{{item.author}}</h4>
+                                <p>From {{item.pricePerUnit}} VND</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6">

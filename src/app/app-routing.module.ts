@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'category', component: CategoryComponent },
   { path: 'about-us', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'blog/:id', component: BlogDetailComponent },
+  { path: 'blog-detail', component: BlogDetailComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'check-out', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'confirm', component: ConfirmComponent, canActivate: [AuthGuard] },

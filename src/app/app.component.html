@@ -9,13 +9,10 @@
   </div>
 </div>
 
-<ng-container *ngIf="!isAdminUI; else adminView">
+  <ng-container *ngIf="!isAdminUI">
   <app-header [loginAs]='currentUser ? currentUser.role : 0' (changeUI)="handleChangeUI($event)"></app-header>
+  </ng-container>
   <router-outlet></router-outlet>
+  <ng-container *ngIf="!isAdminUI">
   <app-footer></app-footer>
-</ng-container>
-
-<ng-template #adminView>
-  <router-outlet></router-outlet>
-</ng-template>
-
+  </ng-container>
