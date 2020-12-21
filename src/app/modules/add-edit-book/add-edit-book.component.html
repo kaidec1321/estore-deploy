@@ -1,30 +1,38 @@
-<h1 mat-dialog-title>Add new book</h1>
-<div mat-dialog-content>
-    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
-        <div class="input-group">
-        <label>Name</label>
-        <input type="text" class="input--style-3" formControlName="name" placeholder="Book Name"/>
-        </div>
-        <div class="input-group">
-        <label>Author</label>
-        <input type="text" class="input--style-3" formControlName="author" placeholder="Author"/>
-        </div>
-        <div class="input-group">
-        <label>Description</label>
-            <input type="email" class="input--style-3" formControlName="description" placeholder="Desription"/>
-        </div>
-        <div class="input-group">
-            <label>Publisher</label>
-            <input type="text" class="input--style-3" formControlName="publisher" placeholder="Publisher"/>
-        </div>
-        <div class="input-group">
-        <label>Number of Pages</label>
-        <input type="number" min="20" class="input--style-3" formControlName="noOfPage" placeholder="Number Of Page"/>
-        </div>
-        <div class="p-t-10">
-            <button type="submit" name="submit" id="submit" class="btn btn--pill btn--green" >
-                Upload
-            </button>
-        </div>
-    </form>
+<div mat-dialog-title>Book information</div>
+<div mat-dialog-content class="limiter container-login100 wrap-login100 ">
+                    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="row g-3">
+                        <div class="col-md-6">
+                          <label for="name" class="form-label">Name</label>
+                          <input type="text" class="form-control" id="name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="author" class="form-label">Author</label>
+                            <input type="text" class="form-control" id="author">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="nopages" class="form-label">No Of Pages</label>
+                            <input type="text" class="form-control" id="nopages">
+                          </div>
+                          <div class="col-md-6">
+                              <label for="size" class="form-label">Size</label>
+                              <input type="text" class="form-control" id="size">
+                            </div>
+                        <div class="col-12">
+                          <label for="publisher" class="form-label">Publisher</label>
+                          <input type="text" class="form-control" id="publisher">
+                        </div>
+                        <div class="col-12">
+                          <label for="description" class="form-label">Description</label>
+                          <input type="text" class="form-control" id="description">
+                        </div>
+                        <div class="col-12">
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Choose Images</label>
+                            <input class="form-control" type="file" id="formFileMultiple" multiple>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                </form>
 </div>

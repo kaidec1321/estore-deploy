@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   }
   addNew() {
     this.dialog.open(AddEditBookComponent, {
-      data: {}
+      data: {},
     });
   }
 
