@@ -7,29 +7,30 @@
                 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                     <div class="input-group">
                     <label>First name</label>
-                    <input type="text" class="input--style-3" name="firstname" id="firstName" placeholder="First Name"/>
+                    <input type="text" class="input--style-3" formControlName="firstname" name="firstname" id="firstName" placeholder="First Name"/>
                     </div>
                     <div class="input-group">
                     <label>Last name</label>
-                    <input type="text" class="input--style-3" name="lastname" id="lastName" placeholder="Last Name"/>
+                    <input type="text" class="input--style-3" formControlName="lastname" name="lastname" id="lastName" placeholder="Last Name"/>
                     </div>
                     <div class="input-group">
                     <label>Email</label>
-                        <input type="email" class="input--style-3" name="email" id="email" placeholder="Email"/>
+                        <input type="email" class="input--style-3" formControlName="email" name="email" id="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
                     </div>
                     <div class="input-group">
                         <label>Mobile</label>
-                        <input type="text" class="input--style-3" name="mobilenumber" id="mobilenumber" placeholder="Phone number"/>
+                        <input type="text" class="input--style-3" formControlName="phone" name="mobilenumber" id="mobilenumber" placeholder="Phone number"/>
                     </div>
                     <div class="input-group">
                     <label>Password</label>
-                    <input type="password" class="input--style-3" name="password" id="password" placeholder="Password"/>
+                    <input type="password" class="input--style-3" formControlName="password" name="password" id="password" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
                     </div>
                     <div class="p-t-10">
                         <button type="submit" name="submit" id="submit" class="btn btn--pill btn--green" >
                             Sign up
                         </button>
                     </div>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                 </form>
             </div>
         </div>

@@ -22,11 +22,12 @@ import { LogInComponent } from './modules/log-in/log-in.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GlobalService } from './_services/global.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './modules/register/register.component';
 import { AddEditBookComponent } from './modules/add-edit-book/add-edit-book.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,10 @@ import { AddEditBookComponent } from './modules/add-edit-book/add-edit-book.comp
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

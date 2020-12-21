@@ -34,8 +34,8 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="creat_account d-flex align-items-center">
-                                    <input type="checkbox" id="f-option" name="selector">
-                                    <label for="f-option">Remember me</label>
+                                    <input type="checkbox" id="f-option" name="selector" formControlName="admin">
+                                    <label for="f-option">Admin login</label>
                                 </div>
                                 <button [disabled]="loading" class="btn_3">
                                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>

@@ -28,7 +28,6 @@ export class AddEditBookComponent implements OnInit {
 
   onSubmit() {
     console.log(this.f.name.value);
-    
   }
 
 }

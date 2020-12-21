@@ -1,11 +1,11 @@
 <div class="slider-area ">
     <!-- Mobile Menu -->
-    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+    <div class="single-slider slider-height2 d-flex align-items-center" style="background-image: url(assets/img/hero/category.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Cart List</h2>
+                        <h2>Cart</h2>
                     </div>
                 </div>
             </div>
@@ -29,44 +29,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="cart-item" id="none">
+                        <tr class="cart-item" id="none" *ngFor="let item of cart.cartBooks">
                             <td>
                                 <div class="media">
                                     <div class="d-flex">
-                                        <img src="assets/img/arrivel/arrivel_1.png" alt="" />
+                                        <img src="{{item.book.bookImages[0].imageSrc}}" alt="" />
                                     </div>
                                     <div class="media-body">
-                                        <p class="book-name">Gone with the Wind</p>
-                                        <p class="author">Margaret Mitchell</p>
+                                        <p class="book-name">{{item.book.title}}</p>
+                                        <p class="author">{{item.book.author}}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <h5 class="book-price">$360.00</h5>
+                                <h5 class="book-price">${{item.book.pricePerUnit | number: '1.2-2'}}</h5>
                             </td>
                             <td>
                                 <div class="product_count">
-                                    <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                      class="input-text qty input-number" />
-                    <button
-                      class="increase input-number-increment items-count" type="button">
-                      <i class="ti-angle-up"></i>
-                    </button>
-                    <button
-                      class="reduced input-number-decrement items-count" type="button">
-                      <i class="ti-angle-down"></i>
-                    </button> -->
-                                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                    <input class="input-number quantity" type="text" value="1" min="0" max="10"
-                                        id="quantity">
-                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                                    <span class="input-number-decrement" style="cursor: pointer;" (click)="decrease(item)"> <i class="ti-minus"></i></span>
+                                    <input class="input-number quantity" type="text" value="1" min="0" max="10" id="quantity" [(ngModel)]="item.quantity" (ngModelChange)="calculateTotal()">
+                                    <span class="input-number-increment" style="height: 40px; cursor: pointer;" (click)="increase(item)"> <i class="ti-plus"></i></span>
                                 </div>
                             </td>
                             <td>
-                                <h5 class="total-price">$720.00</h5>
+                                <h5 class="total-price">${{item.book.pricePerUnit*item.quantity | number: '1.2-2'}}</h5>
                             </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>
                                 <div class="media">
                                     <div class="d-flex">
@@ -83,18 +72,18 @@
                             </td>
                             <td>
                                 <div class="product_count">
-                                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                    <span class="input-number-decrement" style="cursor: pointer;"> <i class="ti-minus"></i></span>
                                     <input class="input-number" type="text" value="1" min="0" max="10">
-                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                                    <span class="input-number-increment" style="height: 40px; cursor: pointer;"> <i class="ti-plus"></i></span>
                                 </div>
                             </td>
                             <td>
                                 <h5>$720.00</h5>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr class="bottom_button">
                             <td>
-                                <a class="btn_1" href="#">Update Cart</a>
+                                <a class="btn_1" (click)="updateCart()">Update Cart</a>
                             </td>
                             <td></td>
                             <td></td>
@@ -111,7 +100,7 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5>$2160.00</h5>
+                                <h5>${{total}}</h5>
                             </td>
                         </tr>
                         <tr class="shipping_area">

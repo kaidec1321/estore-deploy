@@ -26,7 +26,9 @@ export class AppComponent implements OnInit {
   ) {
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
-      console.log(x)});
+      console.log(x);
+      this.globalService.getGlobalInfo();  
+    });
 
     this.subscription = this.globalService.loadingAnnounce$.subscribe(state => {
       if (state) $('#preloader-active').fadeIn('slow');

@@ -83,7 +83,7 @@
   
     
   .bg-gra-01 {
-    background-image: url("../../../assets/img/hero/category.jpg");
+    background-image: url("../../../assets/img/bg-signup.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -264,7 +264,7 @@
   }
   
   .card-3 .card-heading {
-    background: url("../../../assets/img/hero/category.jpg") top left/cover no-repeat;
+    background: url("../../../assets/img/bg-heading-03.jpg") top left/cover no-repeat;
     display: table-cell;
     width: 50%;
   }

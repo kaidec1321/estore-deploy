@@ -5,14 +5,30 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Book } from '../_models/book';
 import { CategoryResponse } from '../_models/cat-res';
+import { GlobalInfo } from '../_models/info';
+import { Cart } from '../_models/cart';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalService {
+    globalInfo: GlobalInfo = new GlobalInfo();
+
     private announceLoadingSource = new Subject<boolean>();
 
     loadingAnnounce$ = this.announceLoadingSource.asObservable();
 
     constructor(private http: HttpClient) {
+    }
+
+    getGlobalInfo() {
+        return this.http.get<any>(`${environment.api}/customer/me`).subscribe(data => {
+            this.globalInfo = data;
+            console.log(data);
+            console.log(this.globalInfo);
+        });
+    }
+
+    getCartId() {
+        return this.globalInfo.cart.id;
     }
 
     announceLoading(state: boolean) {
@@ -46,5 +62,13 @@ export class GlobalService {
     
         // Make the API call using the new parameters.
         return this.http.get(`${environment.api}/api/v1/data/logs`, { params: params })
+    }
+
+    addToCart(bookId, quantity): Observable<boolean> {
+        return this.http.post<any>(`${environment.api}/cart-book/update-cart`, {bookId, quantity});
+    }
+
+    getCart(id): Observable<Cart> {
+        return this.http.get<any>(`${environment.api}/cart/${id}`);
     }
 }

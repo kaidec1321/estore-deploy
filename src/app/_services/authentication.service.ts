@@ -20,10 +20,15 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
+    login(email: string, password: string, isAdmin: boolean) {
+        var url = isAdmin ? `${environment.api}/admin/signin` : `${environment.api}/customer/login`;
+        return this.http.post<any>(url, { email, password })
+            .pipe(map(data => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                let user = new User();
+                user.token = data.token;
+                user.email = email;
+                user.role = isAdmin ? 2 : 1;
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
@@ -34,5 +39,9 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+    }
+
+    signup(email, password, phone, fullName) {
+        return this.http.post<any>(`${environment.api}/customer/create`, { email, password, phone, fullName })
     }
 }

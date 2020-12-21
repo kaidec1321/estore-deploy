@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { GlobalService } from 'src/app/_services/global.service';
 
 @Component({
   selector: 'app-log-in',
@@ -19,7 +20,8 @@ export class LogInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private globalService: GlobalService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -30,7 +32,8 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      admin: [false]
     });
   }
 
@@ -43,15 +46,16 @@ export class LogInComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
+    
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login(this.f.username.value, this.f.password.value, this.f.admin.value)
       .pipe(first())
       .subscribe({
         next: () => {
+          
           // get return url from route parameters or default to '/'
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          
+          this.globalService.getGlobalInfo();
           this.router.navigate([returnUrl]);
         },
         error: error => {
