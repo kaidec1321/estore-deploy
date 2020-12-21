@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { fakeBackendProvider } from '../app/_helpers/fake-backend'
-
+import { fakeBackendProvider } from '../app/_helpers/fake-backend';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
@@ -25,6 +25,8 @@ import { AdminComponent } from './modules/admin/admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GlobalService } from './_services/global.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './modules/register/register.component';
+import { AddEditBookComponent } from './modules/add-edit-book/add-edit-book.component';
 
 @NgModule({
   declarations: [
@@ -43,14 +45,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LogInComponent,
     HeaderComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    RegisterComponent,
+    AddEditBookComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -13,6 +13,8 @@ import { ConfirmComponent } from './modules/confirm/confirm.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LogInComponent } from './modules/log-in/log-in.component';
+import { RegisterComponent } from './modules/register/register.component'
+
 import { AuthGuard }from './_helpers/auth.guard'
 
 const routes: Routes = [
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: 'confirm', component: ConfirmComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LogInComponent},
+  { path: 'sign-up', component: RegisterComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
 ];
 
