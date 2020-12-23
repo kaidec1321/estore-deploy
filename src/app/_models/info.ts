@@ -1,11 +1,12 @@
 import { Cart } from "./cart";
 import { Order } from "./order";
+import { Review } from "./review";
 
 export class GlobalInfo {
     id: string = '';
     email: string = '';
     password: string = '';
-    fullname: string = '';
+    fullName: string = '';
     loyalPoint: number = 0;
     birthday: Date = new Date();
     phone: string = '0000000000';
@@ -16,4 +17,5 @@ export class GlobalInfo {
     createdAt: Date = new Date();
     cart: Cart;
     orders: Order[];
+    reviews: Review[];
 }

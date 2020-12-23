@@ -33,6 +33,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { AddEditCategoryComponent } from './modules/add-edit-category/add-edit-category.component';
 import { AddEditPromotionComponent } from './modules/add-edit-promotion/add-edit-promotion.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AddEditPromotionComponent } from './modules/add-edit-promotion/add-edit
     RegisterComponent,
     AddEditBookComponent,
     AddEditCategoryComponent,
-    AddEditPromotionComponent
+    AddEditPromotionComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
