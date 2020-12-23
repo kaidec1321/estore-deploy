@@ -34,7 +34,7 @@ export class GlobalService {
     }
 
     getBookList(): Observable<Book[]> {
-        return this.http.get<any>(`${environment.api}/book/list`);
+        return this.http.get<any>(`${environment.api}/book`);
     }
 
     getBook(id): Observable<Book[]> {
@@ -95,15 +95,15 @@ export class GlobalService {
     }
 
     getAllOrder(): Observable<any> {
-        return this.http.get<any>(`${environment.api}/order/all`);
+        return this.http.get<any>(`${environment.api}/order`);
     }
 
     createOrder(tax, shippingPrice, address): Observable<any> {
         return this.http.post<any>(`${environment.api}/order`, {tax, shippingPrice, address});
     }
 
-    updateOrder(id): Observable<any> {
-        return this.http.put<any>(`${environment.api}/order/${id}`, {});
+    updateOrder(id, status): Observable<any> {
+        return this.http.put<any>(`${environment.api}/order/${id}`, {status});
     }
 
     getAllPromotion(): Observable<any> {
@@ -123,10 +123,18 @@ export class GlobalService {
     }
 
     getAllCustomer(): Observable<any> {
-        return this.http.get<any>(`${environment.api}/customer/list`);
+        return this.http.get<any>(`${environment.api}/customer`);
     }
 
     deleteCustomer(id): Observable<any> {
         return this.http.put<any>(`${environment.api}/customer/delete/${id}`, {});
+    }
+
+    getMyOrder(): Observable<any> {
+        return this.http.get<any>(`${environment.api}/order/my-list`);
+    }
+
+    getOrder(id): Observable<any> {
+        return this.http.get<any>(`${environment.api}/order/${id}`);
     }
 }

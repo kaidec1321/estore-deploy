@@ -1,11 +1,12 @@
 <div class="slider-area ">
     <!-- Mobile Menu -->
-    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+    <div class="single-slider slider-height2 d-flex align-items-center"
+        style="background-image: url(assets/img/hero/category.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Checkout</h2>
+                        <h2>Order</h2>
                     </div>
                 </div>
             </div>
@@ -16,7 +17,7 @@
 
 <!--================Checkout Area =================-->
 <section class="checkout_area section_padding">
-    <div class="container">
+    <!-- <div class="container">
         <div class="returning_customer">
             <div class="check_title">
                 <h2>
@@ -58,12 +59,12 @@
             </div>
             <input type="text" placeholder="Enter coupon code" />
             <a class="tp_btn" href="#">Apply Coupon</a>
-        </div>
-        <div class="billing_details">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Billing Details</h3>
-                    <div class="row contact_form">
+        </div> -->
+    <div class="billing_details p-3">
+        <h3>Billing Details</h3>
+        <div class="row">
+            <div class="col-lg-6" *ngFor="let order of orders">
+                <!-- <div class="row contact_form">
                         <div class="col-md-6 form-group p_star">
                             <input type="text" class="form-control" id="first" name="name" />
                             <span class="placeholder" data-placeholder="First name"></span>
@@ -112,23 +113,23 @@
                                 placeholder="Order Notes"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="order_box">
-                        <h2>Your Order</h2>
-                        <ul class="list">
-                            <li>
-                                <a href="#">Product
-                                    <span>Total</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Fresh Blackberry
-                                    <span class="middle">x 02</span>
-                                    <span class="last">$720.00</span>
-                                </a>
-                            </li>
-                            <li>
+                </div> -->
+                <div class="order_box" *ngFor="let item of order.orderBooks">
+                    <h2>Order {{order.id}}</h2>
+                    <ul class="list">
+                        <li>
+                            <a>Product
+                                <span>Total</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="[ '/book/' + item.bookId ]">{{ item.book.title }}
+                                <span class="middle">x {{ item.quantity | number:'2.0-0' }}</span>
+                                <span class="last">${{ item.book.pricePerUnit * item.quantity * (1 - item.book.discount)
+                                    | number:'1.2-2' }}</span>
+                            </a>
+                        </li>
+                        <!-- <li>
                                 <a href="#">Fresh Tomatoes
                                     <span class="middle">x 02</span>
                                     <span class="last">$720.00</span>
@@ -139,44 +140,39 @@
                                     <span class="middle">x 02</span>
                                     <span class="last">$720.00</span>
                                 </a>
-                            </li>
-                        </ul>
-                        <ul class="list list_2">
-                            <li>
-                                <a href="#">Subtotal
-                                    <span>$2160.00</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Shipping
-                                    <span>Flat rate: $50.00</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Total
-                                    <span>$2210.00</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector" />
-                                <label for="f-option5">Check payments</label>
-                                <div class="check"></div>
-                            </div>
-                            <p>
-                                Please send a check to Store Name, Store Street, Store Town,
-                                Store State / County, Store Postcode.
-                            </p>
-                        </div>
+                            </li> -->
+                    </ul>
+                    <ul class="list list_2">
+                        <li>
+                            <a>Subtotal
+                                <span>${{order.totalBookPrice}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>Shipping
+                                <span>${{order.shippingPrice}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>Total
+                                <span>${{order.total}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="payment_item">
+                        <p>Ship COD</p>
+                        <!-- <p>
+                            Please send a check to Store Name, Store Street, Store Town,
+                            Store State / County, Store Postcode.
+                        </p> -->
+                    </div>
 
-                        <div class="creat_account">
+                    <!-- <div class="creat_account">
                             <input type="checkbox" id="f-option4" name="selector" />
                             <label for="f-option4">I’ve read and accept the </label>
                             <a href="#">terms & conditions*</a>
                         </div>
-                        <a class="btn_3" href="#">Proceed</a>
-                    </div>
+                        <a class="btn_3" href="#">Proceed</a> -->
                 </div>
             </div>
         </div>

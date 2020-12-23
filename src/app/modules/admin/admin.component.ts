@@ -1,11 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Book } from 'src/app/_models/book';
 import { GlobalService } from 'src/app/_services/global.service';
 import { AddEditBookComponent } from '../add-edit-book/add-edit-book.component';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/_models/category';
 import { AddEditCategoryComponent } from '../add-edit-category/add-edit-category.component';
@@ -24,7 +21,7 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['title', 'author', 'publisher', 'size', 'date', 'noPage', 'action'];
   displayedColumnsCategory: string[] = ['name', 'description', 'action'];
-  displayedColumnsOrder: string[] = ['customer', 'address', 'book', 'ship', 'total', 'status', 'action'];
+  displayedColumnsOrder: string[] = ['customer', 'address', 'book', 'ship', 'discount', 'total', 'status', 'action'];
   displayedColumnsPromotion: string[] = ['index', 'discount', 'pts', 'maxPrice', 'minValue', 'startDate', 'endDate', 'action'];
   displayedColumnsUser: string[] = ['email', 'name', 'addr', 'phone', 'action'];
   dataSource: MatTableDataSource<Book>;
@@ -52,6 +49,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.globalService.announceAdmin(true);
     this.loadCategory();
     this.loadBook();
+    this.loadUser();
 
   }
 
@@ -73,6 +71,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   loadOrder() {
     this.globalService.getAllOrder().subscribe(data => {
       this.orders = data;
+      this.orders.map(item => item.customer = this.customers.find(x => x.id = item.customerId));
+      this.orders.map(item => {
+        if (item.promotion) {
+          item.discountMoney = item.promotion.discount*item.totalBookPrice;
+          if (item.promotion.maxDiscountPrice && item.discountMoney > item.promotion.maxDiscountPrice) item.discountMoney = item.promotion.maxDiscountPrice;
+        }
+      });
       this.dataSourceOrder = new MatTableDataSource(this.orders);
     });
   }
@@ -234,9 +239,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   updateOrder(id, status) {
-    let nextStatus = this.status[this.status.findIndex(item => item = status) + 1]
+    let nextStatus = this.status[this.status.findIndex(item => item == status) + 1]
     if (confirm(`Do you want to change this order status from \"${status}\" to \"${nextStatus}\"?`)) {
-      this.globalService.updateOrder(id).subscribe(data => {
+      this.globalService.updateOrder(id, nextStatus).subscribe(data => {
         let index = this.orders.findIndex(item => item.id == id);
         this.orders[index].status = nextStatus;
         this.dataSourceOrder = new MatTableDataSource(this.orders);

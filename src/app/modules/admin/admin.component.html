@@ -380,12 +380,12 @@
                                     <table mat-table [dataSource]="dataSourceOrder" matSort style="width: 100%;">
                                   
                                       <ng-container matColumnDef="customer">
-                                        <th mat-header-cell *matHeaderCellDef style="width: 20%"> Customer </th>
-                                        <td mat-cell *matCellDef="let element"> My name </td>
+                                        <th mat-header-cell *matHeaderCellDef style="width: 25%"> Customer </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.customer.email}} </td>
                                       </ng-container>
                                   
                                       <ng-container matColumnDef="address">
-                                        <th mat-header-cell *matHeaderCellDef style="width: 30%"> Address </th>
+                                        <th mat-header-cell *matHeaderCellDef style="width: 25%"> Address </th>
                                         <td mat-cell *matCellDef="let element"> {{element.address}} </td>
                                       </ng-container>
 
@@ -395,13 +395,18 @@
                                       </ng-container>
 
                                       <ng-container matColumnDef="ship">
-                                        <th mat-header-cell *matHeaderCellDef style="width: 10%"> Ship </th>
+                                        <th mat-header-cell *matHeaderCellDef style="width: 5%"> Ship </th>
                                         <td mat-cell *matCellDef="let element"> {{element.shippingPrice}}$ </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="discount">
+                                        <th mat-header-cell *matHeaderCellDef style="width: 10%"> Discount </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.discountMoney}}$ </td>
                                       </ng-container>
 
                                       <ng-container matColumnDef="total">
                                         <th mat-header-cell *matHeaderCellDef style="width: 10%"> Total Cost </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.totalBookPrice + element.shippingPrice + element.tax}}$ </td>
+                                        <td mat-cell *matCellDef="let element"> {{element.totalBookPrice + element.shippingPrice + element.tax - element.discountMoney}}$ </td>
                                       </ng-container>
                                       
                                       <ng-container matColumnDef="status">

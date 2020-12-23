@@ -89,7 +89,13 @@
                             <td></td>
                             <td>
                                 <div class="cupon_text float-right">
-                                    <a class="btn_1" href="#">Close Coupon</a>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Choose Coupon</mat-label>
+                                        <mat-select [(value)]="selectedPromotion" (selectionChange)="choosePromotion()">
+                                          <mat-option value="">None</mat-option>
+                                          <mat-option [value]="option.id" *ngFor="let option of promotions" [disabled]="check(option)">{{ option.discount | number: '1.2-2'}}% - need {{ option.loyalPoint ? option.loyalPoint : 0 }}pts, min value {{ option.minAcceptValue ? option.minAcceptValue : 'none' }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </td>
                         </tr>
@@ -100,7 +106,17 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5>${{total}}</h5>
+                                <h5>${{total | number: '1.2-2'}}</h5>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedPromotion">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h5>After use coupon</h5>
+                            </td>
+                            <td>
+                                <h5>${{total - discount | number: '1.2-2'}}</h5>
                             </td>
                         </tr>
                         <tr class="shipping_area">
@@ -113,28 +129,31 @@
                                 <div class="shipping_box">
                                     <ul class="list">
                                         <li class="active">
-                                            Shipping fee: $12.00
-                                            <input type="radio" aria-label="Radio button for following text input">
-                                        </li>
-                                        <li class="active">
-                                            Gift Service: $2.00
-                                            <input type="radio" aria-label="Radio button for following text input">
+                                            Shipping fee: ${{shippingPrice | number: '1.2-2'}}
                                         </li>
                                     </ul>
                                     <h6>
                                         Enter Address:
-                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
                                     </h6>
-                                    <input class="post_code" type="textarea" placeholder="Address" />
-                                    <a class="btn_1" href="#">Update Details</a>
+                                    <input class="post_code" type="textarea" placeholder="Address" [(ngModel)]="address" required (keyup)="checkAddress()">
                                 </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h5>Total</h5>
+                            </td>
+                            <td>
+                                <h5>${{1 + total - discount + shippingPrice | number: '1.2-2'}}</h5>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" href="#">Continue Shopping</a>
-                    <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                    <a class="btn_1 mr-5" [routerLink]="[ '/book-list' ]">Continue Shopping</a>
+                    <a class="btn_1 checkout_btn_1" (click)="updateOrder()">Proceed</a>
                 </div>
             </div>
         </div>

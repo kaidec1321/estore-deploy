@@ -12,8 +12,14 @@ declare var $: any;
 })
 export class BookListComponent implements OnInit {
   bookDataOrigin: Book[];
+  bookDataFilter: Book[];
   bookDataShow: Book[];
   category: Category[];
+  noPage: number = 1;
+  pageSize: number = 6;
+  noBook: number = 0;
+  categoryFilter: string;
+  wordSearch: string = '';
 
   constructor(private globalService: GlobalService,
     private router: Router) { }
@@ -32,18 +38,44 @@ export class BookListComponent implements OnInit {
       }); 
     });
     this.globalService.getBookList().subscribe(data => {
-      this.bookDataShow = this.bookDataOrigin = data;
+      this.bookDataFilter = this.bookDataOrigin = data;
+      this.noBook = data.length;
+      this.paging();
     });
 
     this.globalService.getAllCategory().subscribe(data => {
       this.category = data;
-      console.log(this.category);
     });
     
   }
 
+  paging() {
+    this.bookDataShow = this.bookDataFilter.slice(0, this.pageSize*this.noPage);
+  }
+
   openBookDetail(id) {
     this.router.navigate([`book/${id}`]);
+  }
+
+  loadMore() {
+    this.globalService.announceLoading(true);
+    this.noPage++;
+    this.paging();
+    this.globalService.announceLoading(false);
+  }
+
+  onCategoryClick(id) {
+    if (this.categoryFilter == id) this.categoryFilter = null;
+    else this.categoryFilter = id;
+    this.filter();
+  }
+
+  filter() {
+    this.bookDataFilter = this.bookDataOrigin.filter(item => item.title.toLowerCase().includes(this.wordSearch.trim().toLowerCase()) || item.author.toLowerCase().includes(this.wordSearch.trim().toLowerCase()));
+    if (this.categoryFilter) this.bookDataFilter = this.bookDataOrigin.filter(item => item.categoryId == this.categoryFilter);
+    this.noBook = this.bookDataFilter.length;
+    this.noPage = 1;
+    this.paging();
   }
 
 }
