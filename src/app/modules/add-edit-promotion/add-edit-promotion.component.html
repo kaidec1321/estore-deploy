@@ -1,0 +1,35 @@
+<div mat-dialog-title>Promotion information</div>
+<div mat-dialog-content class="limiter container-login100 wrap-login100 row">
+    <div class="col-3">
+        <label for="discount" class="form-label">Discount</label>
+        <div class="input-group">
+            <input type="text" class="form-control" name="discount" [(ngModel)]="this.item.discount">
+            <div class="input-group-append">
+              <span class="input-group-text">%</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <label for="pts" class="form-label">Loyal Points:</label>
+        <input type="text" class="form-control" name="pts" [(ngModel)]="this.item.loyalPoint">
+    </div>
+    <div class="col-3">
+        <label for="max" class="form-label">Max Discount</label>
+        <input type="text" class="form-control" name="max" [(ngModel)]="this.item.maxDiscountPrice">
+    </div>
+    <div class="col-3">
+        <label for="min" class="form-label">Min Value</label>
+        <input type="text" class="form-control" name="min" [(ngModel)]="this.item.minAcceptOrderPrice">
+    </div>
+    <div class="col-md-6">
+        <label for="from" class="form-label">From</label>
+        <input type="date" class="form-control" name="from" [(ngModel)]="this.startDate">
+    </div>
+    <div class="col-md-6">
+        <label for="from" class="form-label">To</label>
+        <input type="date" class="form-control" name="from" [(ngModel)]="this.endDate">
+    </div>
+    <div class="col-12 mt-3 d-flex align-items-center">
+        <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    </div>
+</div>

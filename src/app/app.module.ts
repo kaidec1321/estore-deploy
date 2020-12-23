@@ -28,6 +28,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './modules/register/register.component';
 import { AddEditBookComponent } from './modules/add-edit-book/add-edit-book.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { AddEditCategoryComponent } from './modules/add-edit-category/add-edit-category.component';
+import { AddEditPromotionComponent } from './modules/add-edit-promotion/add-edit-promotion.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FooterComponent,
     AdminComponent,
     RegisterComponent,
-    AddEditBookComponent
+    AddEditBookComponent,
+    AddEditCategoryComponent,
+    AddEditPromotionComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +66,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatSnackBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

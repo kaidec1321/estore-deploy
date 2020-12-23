@@ -43,14 +43,11 @@ export class RegisterComponent implements OnInit {
     // user.password = this.f.password.value;
     // user.phone = this.f.phone.value;
     // user.fullname = this.f.firstname.value + ' ' + this.f.lastname.value;
-    this.globalService.announceLoading(true);
     this.authenticationService.signup(this.f.email.value, this.f.password.value, this.f.phone.value, this.f.firstname.value + ' ' + this.f.lastname.value).subscribe(data => {
       this.router.navigate(['/login']);
-      this.globalService.announceLoading(false);
     },
     error => {
       this.error = error;
-      this.globalService.announceLoading(false);
     })
 
   }

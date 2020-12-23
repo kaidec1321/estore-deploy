@@ -1,6 +1,7 @@
 export class Customer {
     id: string;
     email: string;
+    deleted: boolean;
     password: string;
     fullName: string;
     loyalPoint: number;

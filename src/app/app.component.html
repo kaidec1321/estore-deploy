@@ -10,7 +10,7 @@
 </div>
 
   <ng-container *ngIf="!isAdminUI">
-  <app-header [loginAs]='currentUser ? currentUser.role : 0' (changeUI)="handleChangeUI($event)"></app-header>
+  <app-header [loginAs]='currentUser ? currentUser.role : 0'></app-header>
   </ng-container>
   <router-outlet></router-outlet>
   <ng-container *ngIf="!isAdminUI">

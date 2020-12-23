@@ -12,7 +12,6 @@ import { LoginAs } from '../../enums/login.enum'
 @Injectable()
 export class HeaderComponent implements OnInit {
   @Input() loginAs: number = 0;
-  @Output() changeUI = new EventEmitter<string>();
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -34,7 +33,6 @@ export class HeaderComponent implements OnInit {
 
   navigateToAdminPage() {
     this.router.navigate(['/admin']);
-    this.changeUI.emit('admin');
   }
 }
 

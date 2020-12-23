@@ -54,23 +54,23 @@
                         <tbody>
                             <tr>
                                 <th scope="row">Publisher</th>
-                                <td>Otto Books</td>
+                                <td>{{ bookDetail.publisher }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Published Date</th>
-                                <td>02-2019</td>
+                                <td>{{ bookDetail.publicationDate | date:'longDate' }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Size</th>
-                                <td>13.5 x 20 cm</td>
+                                <td>{{ bookDetail.size }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Total Page</th>
-                                <td>316</td>
+                                <td>{{ bookDetail.noPage }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">SKU</th>
-                                <td>9552147738847</td>
+                                <th scope="row">ISBN</th>
+                                <td>{{ bookDetail.isbn }}</td>
                             </tr>
                         </tbody>
                     </table>

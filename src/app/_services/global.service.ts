@@ -7,32 +7,30 @@ import { Book } from '../_models/book';
 import { CategoryResponse } from '../_models/cat-res';
 import { GlobalInfo } from '../_models/info';
 import { Cart } from '../_models/cart';
+import { Category } from '../_models/category';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalService {
-    globalInfo: GlobalInfo = new GlobalInfo();
 
     private announceLoadingSource = new Subject<boolean>();
+    private announceAdminUI = new Subject<boolean>();
 
     loadingAnnounce$ = this.announceLoadingSource.asObservable();
+    adminAnnounce$ = this.announceAdminUI.asObservable();
 
     constructor(private http: HttpClient) {
     }
 
     getGlobalInfo() {
-        return this.http.get<any>(`${environment.api}/customer/me`).subscribe(data => {
-            this.globalInfo = data;
-            console.log(data);
-            console.log(this.globalInfo);
-        });
-    }
-
-    getCartId() {
-        return this.globalInfo.cart.id;
+        return this.http.get<any>(`${environment.api}/customer/me`);
     }
 
     announceLoading(state: boolean) {
         this.announceLoadingSource.next(state);
+    }
+
+    announceAdmin(state: boolean = true) {
+        this.announceAdminUI.next(state);
     }
 
     getBookList(): Observable<Book[]> {
@@ -44,10 +42,22 @@ export class GlobalService {
     }
 
     addBook(book): Observable<boolean> {
-        return this.http.post<any>(`${environment.api}/category`, book);
+        return this.http.post<any>(`${environment.api}/book`, book);
     }
 
-    getAllCategory(): Observable<CategoryResponse> {
+    editBook(id, title, author, noPage, size, pricePerUnit,
+        discount, categoryId, categoryName, publisher, publicationDate,
+        description, isbn): Observable<any> {
+        return this.http.put<any>(`${environment.api}/book/${id}`, {title, author, noPage, size, pricePerUnit,
+            discount, categoryId, categoryName, publisher, publicationDate,
+            description, isbn})
+    }
+
+    deleteBook(id): Observable<any> {
+        return this.http.put<any>(`${environment.api}/book/delete/${id}`, {})
+    }
+
+    getAllCategory(): Observable<Category[]> {
         return this.http.get<any>(`${environment.api}/category`);
     } 
 
@@ -70,5 +80,53 @@ export class GlobalService {
 
     getCart(id): Observable<Cart> {
         return this.http.get<any>(`${environment.api}/cart/${id}`);
+    }
+
+    addCategory(name, description): Observable<any> {
+        return this.http.post<any>(`${environment.api}/category`, {name, description})
+    }
+
+    editCategory(id, name, description): Observable<any> {
+        return this.http.put<any>(`${environment.api}/category/${id}`, {name, description})
+    }
+
+    deleteCategory(id): Observable<any> {
+        return this.http.delete<any>(`${environment.api}/category/${id}`);
+    }
+
+    getAllOrder(): Observable<any> {
+        return this.http.get<any>(`${environment.api}/order/all`);
+    }
+
+    createOrder(tax, shippingPrice, address): Observable<any> {
+        return this.http.post<any>(`${environment.api}/order`, {tax, shippingPrice, address});
+    }
+
+    updateOrder(id): Observable<any> {
+        return this.http.put<any>(`${environment.api}/order/${id}`, {});
+    }
+
+    getAllPromotion(): Observable<any> {
+        return this.http.get<any>(`${environment.api}/promotion`);
+    }
+
+    createPromotion(loyalPoint, discount, maxDiscountPrice, minAcceptOrderPrice, endDate, startDate): Observable<any> {
+        return this.http.post<any>(`${environment.api}/promotion`, {loyalPoint, discount, maxDiscountPrice, minAcceptOrderPrice, endDate, startDate});
+    }
+
+    updatePromotion(id, loyalPoint, discount, maxDiscountPrice, minAcceptOrderPrice, endDate, startDate): Observable<any> {
+        return this.http.put<any>(`${environment.api}/promotion/${id}`, {loyalPoint, discount, maxDiscountPrice, minAcceptOrderPrice, endDate, startDate});
+    }
+
+    deletePromotion(id): Observable<any> {
+        return this.http.put<any>(`${environment.api}/promotion/${id}`, {isDeleted: true});
+    }
+
+    getAllCustomer(): Observable<any> {
+        return this.http.get<any>(`${environment.api}/customer/list`);
+    }
+
+    deleteCustomer(id): Observable<any> {
+        return this.http.put<any>(`${environment.api}/customer/delete/${id}`, {});
     }
 }

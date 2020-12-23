@@ -33,7 +33,7 @@
                             <td>
                                 <div class="media">
                                     <div class="d-flex">
-                                        <img src="{{item.book.bookImages[0].imageSrc}}" alt="" />
+                                        <img src="{{item.book.bookImages.length ? item.book.bookImages[0].imageSrc : 'assets/img/categori/product5.png'}}" alt="" />
                                     </div>
                                     <div class="media-body">
                                         <p class="book-name">{{item.book.title}}</p>

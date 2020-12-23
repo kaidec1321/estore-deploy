@@ -24,11 +24,9 @@ export class BookDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.globalService.announceLoading(true);
     this.globalService.getBook(this.id).subscribe(data => {
       this.bookDetail = data[0];
       this.image = this.bookDetail.bookImages;
-      this.globalService.announceLoading(false);
     });
   }
 

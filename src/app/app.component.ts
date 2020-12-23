@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   title = 'bookshop';
   isLoading = true;
   subscription: Subscription;
+  adminSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -25,43 +26,25 @@ export class AppComponent implements OnInit {
     private globalService: GlobalService
   ) {
     this.authenticationService.currentUser.subscribe(x => {
-      this.currentUser = x;
-      console.log(x);
-      this.globalService.getGlobalInfo();  
+      this.currentUser = x; 
     });
 
     this.subscription = this.globalService.loadingAnnounce$.subscribe(state => {
       if (state) $('#preloader-active').fadeIn('slow');
       else $('#preloader-active').delay(450).fadeOut('slow');
     });
+
+    this.adminSubscription = this.globalService.adminAnnounce$.subscribe(state => this.isAdminUI = state);
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     AOS.init();
-    $(window).on('load', function () {
-      $('#preloader-active').delay(450).fadeOut('slow');
-      $('body').delay(450).css({
-        'overflow': 'visible'
-      });
-    });
-  }
-
-  handleChangeUI(e) {
-    if (e == 'admin') {
-      this.isAdminUI = true;
-      this.router.navigate(['/admin']);
-    }
-    else {
-      this.router.navigate(['/home']);
-      this.isAdminUI = false;
-    }
   }
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
+    this.adminSubscription.unsubscribe();
   }
 }

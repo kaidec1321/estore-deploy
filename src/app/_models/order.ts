@@ -1,4 +1,4 @@
-import { GlobalInfo } from "./info";
+import { Customer } from "./customer";
 import { OrderBook } from './order-book';
 import { Promotion } from './promotion'
 
@@ -9,8 +9,9 @@ export class Order {
     tax: number = 0;
     shippingPrice: number = 0;
     createdAt: Date = new Date();
-    address:  string = 'BKU';
-    customer: GlobalInfo = new GlobalInfo();
+    address:  string;
+    customer: Customer = new Customer();
     promotion: Promotion = new Promotion();
     orderBooks: OrderBook[] = [];
+    status: string = 'new';
 }
