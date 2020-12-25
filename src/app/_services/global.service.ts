@@ -79,7 +79,7 @@ export class GlobalService {
     }
 
     getCart(id): Observable<Cart> {
-        return this.http.get<any>(`${environment.api}/cart/${id}`);
+        return this.http.get<any>(`${environment.api}/cart/`);
     }
 
     addCategory(name, description): Observable<any> {

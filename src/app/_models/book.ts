@@ -4,8 +4,8 @@ import { Image } from "./image"
 
 export class Book {
     id: string;
-    title: string = null;
-    author: string = null;
+    title: string = '';
+    author: string = '';
     categoryId: string = null;
     categoryName: string = null;
     publisher: string = null;
