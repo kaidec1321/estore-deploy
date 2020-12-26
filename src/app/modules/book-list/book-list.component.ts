@@ -71,7 +71,7 @@ export class BookListComponent implements OnInit {
   }
 
   filter() {
-    this.bookDataFilter = this.bookDataOrigin.filter(item => item.title.toLowerCase().includes(this.wordSearch.trim().toLowerCase()) || item.author.toLowerCase().includes(this.wordSearch.trim().toLowerCase()));
+    this.bookDataFilter = this.bookDataOrigin.filter(item => (item.title && item.title.toLowerCase().includes(this.wordSearch.trim().toLowerCase())) || (item.author && item.author.toLowerCase().includes(this.wordSearch.trim().toLowerCase())) || (item.publisher && item.publisher.toLowerCase().includes(this.wordSearch.trim().toLowerCase())));
     if (this.categoryFilter) this.bookDataFilter = this.bookDataOrigin.filter(item => item.categoryId == this.categoryFilter);
     this.noBook = this.bookDataFilter.length;
     this.noPage = 1;

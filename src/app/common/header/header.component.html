@@ -21,12 +21,12 @@
                                     </div>
                                 </div>
                                 <ul class="contact-now">
-                                    <li>+777 2345 7886</li>
+                                    <li>+123 4567 890</li>
                                 </ul>
                             </div>
                             <div class="header-info-right">
                                 <ul>
-                                    <li><a [routerLink]="[ '/account', [] ]">My Account</a></li>
+                                    <li><a [routerLink]="[ '/profile', [] ]">My Account</a></li>
                                     <li><a [routerLink]="[ '/book-list', [] ]">Wish List</a></li>
                                     <li><a [routerLink]="[ '/book-list', [] ]">Shopping</a></li>
                                     <li><a [routerLink]="[ '/cart', [] ]">Cart</a></li>
@@ -75,14 +75,14 @@
                         </div>
                         <div class="col-xl-6 col-lg-5 col-md-4 col-sm-4 fix-card">
                             <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
-                                <li class="d-none d-xl-block">
+                                <!-- <li class="d-none d-xl-block">
                                     <div class="form-box f-right ">
                                         <input type="text" name="Search" placeholder="Search books...">
                                         <div class="search-icon">
                                             <i class="fas fa-search special-tag"></i>
                                         </div>
                                     </div>
-                                </li>
+                                </li> -->
                                 <li class="d-none d-xl-block">
                                     <div class="favorit-items" style="width: 60px;">
                                         <a [routerLink]="[ '/book-list', [] ]">
@@ -96,9 +96,9 @@
                                     </div>
                                 </li>
 
-                                <li class="d-none d-lg-block" *ngIf="loginAs == 2"> <a (click)="navigateToAdminPage()"
+                                <li class="d-lg-block" *ngIf="loginAs == 2"> <a (click)="navigateToAdminPage()"
                                         class="btn header-btn">Admin</a></li>
-                                <li class="d-none d-lg-block"> <a (click)="onClick()" class="btn header-btn">{{ loginAs
+                                <li class="d-lg-block"> <a (click)="onClick()" class="btn header-btn">{{ loginAs
                                         == 0 ? 'Sign in' : 'Sign out'}}</a></li>
                             </ul>
                         </div>
