@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <ul class="contact-now">
-                                    <li>+123 4567 890</li>
+                                    <li><a href="tel:+123456789">+123 4567 890</a></li>
                                 </ul>
                             </div>
                             <div class="header-info-right">
@@ -54,13 +54,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a [routerLink]="[ '/home', [] ]">Home</a></li>
-                                        <li><a [routerLink]="[ '/category', [] ]">Category</a>
-                                            <ul class="submenu">
-                                                <li><a [routerLink]="[ '/book-list', ['novel'] ]">Novels</a></li>
-                                                <li><a [routerLink]="[ '/book-list', ['manga'] ]">Manga</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="hot"><a [routerLink]="[ '/book-list', [] ]">Latest</a></li>
+                                        <li class="hot"><a [routerLink]="[ '/book-list', [] ]">Shopping</a></li>
                                         <li><a>Blog</a>
                                             <ul class="submenu">
                                                 <li><a [routerLink]="[ '/blog', [] ]">Blog</a></li>
@@ -84,11 +78,6 @@
                                     </div>
                                 </li> -->
                                 <li class="d-none d-xl-block">
-                                    <div class="favorit-items" style="width: 60px;">
-                                        <a [routerLink]="[ '/book-list', [] ]">
-                                            <i class="far fa-heart"></i>
-                                        </a>
-                                    </div>
                                 </li>
                                 <li>
                                     <div class="shopping-card" style="width: 75px;">
