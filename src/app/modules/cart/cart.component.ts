@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
           data.map(item => item.bookImages[0].imageSrc = `${environment.api}/${item.bookImages[0].imageSrc}`);
           item.book = data[0];
           if (item.book.discount) item.book.actualPrice = item.book.pricePerUnit*(1- item.book.discount / 100.00);
+          this.calculateTotal();
         }));
         this.total = this.cart.totalBookPrice;
         this.freeship = (this.total >= 300);
@@ -93,8 +94,10 @@ export class CartComponent implements OnInit {
       this.shippingPrice = 0;
     }
     else {
-      if (this.listShipTwo.some(item => this.address.toLowerCase().includes(item.toLowerCase()))) this.shippingPrice = 2;
-      else this.shippingPrice = 5;
+      if (this.address) {
+        if (this.listShipTwo.some(item => this.address.toLowerCase().includes(item.toLowerCase()))) this.shippingPrice = 2;
+        else this.shippingPrice = 5;
+      }
     }
   }
 
