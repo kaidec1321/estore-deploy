@@ -40,6 +40,7 @@ export class CartComponent implements OnInit {
         this.cart.cartBooks.map(item => this.globalService.getBook(item.bookId).subscribe(data => {
           data.map(item => item.bookImages[0].imageSrc = `${environment.api}/${item.bookImages[0].imageSrc}`);
           item.book = data[0];
+          if (this.discount) item.book.actualPrice = item.book.pricePerUnit*(1- item.book.discount);
         }));
         this.total = this.cart.totalBookPrice;
         this.freeship = (this.total >= 300);
@@ -71,7 +72,7 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotal() {
-    this.total = this.cart.cartBooks.reduce((x, item) => x + item.quantity*item.book.pricePerUnit, 0);
+    this.total = this.cart.cartBooks.reduce((x, item) => x + item.quantity*item.book.pricePerUnit*(1-item.book.discount), 0);
     this.freeship = (this.total >= 300);
     this.checkAddress();
   }

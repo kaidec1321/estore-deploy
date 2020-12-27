@@ -59,7 +59,11 @@
                                 <h3> <a>{{item.title}}</a> </h3>
                                 <h4>{{item.author}}</h4>
                                 <h5>{{item.publisher}}</h5>
-                                <p>From ${{item.pricePerUnit}}</p>
+                                <div *ngIf="item.actualPrice">
+                                    <p style="text-decoration: line-through; color: red;">${{item.pricePerUnit}}</p>
+                                    <p>${{item.actualPrice}}</p>
+                                </div>
+                                <div *ngIf="!item.actualPrice"><p>${{item.pricePerUnit}}</p></div>
                             </div>
                         </div>
                     </div>

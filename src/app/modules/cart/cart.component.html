@@ -52,7 +52,14 @@
                                 </div>
                             </td>
                             <td>
-                                <h5 class="total-price">${{item.book.pricePerUnit*item.quantity | number: '1.2-2'}}</h5>
+                                <div *ngIf="item.book.actualPrice">
+                                    <h5 class="total-price" style="color: red; text-decoration: line-through;">${{item.book.pricePerUnit*item.quantity | number: '1.2-2'}}</h5>
+                                    <h5 class="total-price">${{item.book.actualPrice*item.quantity | number: '1.2-2'}}</h5>
+                                </div>
+                                <div *ngIf="!item.book.actualPrice">
+                                    <h5 class="total-price">${{item.book.pricePerUnit*item.quantity | number: '1.2-2'}}</h5>
+                                </div>
+                                
                             </td>
                         </tr>
                         <!-- <tr>

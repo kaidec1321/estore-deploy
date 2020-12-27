@@ -17,6 +17,7 @@ export class Book {
     countRate: number = 5;
     publicationDate: Date = new Date();
     pricePerUnit: number = 10;
+    actualPrice: number;
     quantity: number = 1;
     discount: number = 0;
     createdAt: Date = new Date();

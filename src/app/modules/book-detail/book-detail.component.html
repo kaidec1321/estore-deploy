@@ -85,7 +85,12 @@
                                 <span class="product_count_item number-increment" (click)="increase()"
                                     style="cursor: pointer;"><i class="ti-plus"></i></span>
                             </div>
-                            <p class="m-0">${{bookDetail.pricePerUnit*quantity}}</p>
+                            <div *ngIf="bookDetail.actualPrice">
+                                <p class="m-0" style="color: red; text-decoration: line-through;">${{bookDetail.pricePerUnit*quantity}}</p>
+                                <p class="m-0">${{bookDetail.actualPrice*quantity}}</p>
+                            </div>
+                            <div *ngIf="!bookDetail.actualPrice">${{bookDetail.pricePerUnit*quantity}}</div>
+                            
                         </div>
                         <div class="add_to_cart m-5">
                             <a (click)="addToCart()" class="btn_3" style="cursor: pointer;">add to cart</a>

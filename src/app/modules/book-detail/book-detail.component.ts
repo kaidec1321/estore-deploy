@@ -27,6 +27,7 @@ export class BookDetailComponent implements OnInit {
   ngOnInit(): void {
     this.globalService.getBook(this.id).subscribe(data => {
       this.bookDetail = data[0];
+      if (this.bookDetail.discount) this.bookDetail.actualPrice = this.bookDetail.pricePerUnit*(1 - this.bookDetail.discount);
       this.image = this.bookDetail.bookImages;
       this.image.map(item => item.imageSrc = `${environment.api}/${item.imageSrc}`);
     });
