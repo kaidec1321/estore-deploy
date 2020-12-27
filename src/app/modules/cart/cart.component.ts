@@ -4,6 +4,7 @@ import { Cart } from 'src/app/_models/cart';
 import { GlobalInfo } from 'src/app/_models/info';
 import { Promotion } from 'src/app/_models/promotion';
 import { GlobalService } from 'src/app/_services/global.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -35,7 +36,10 @@ export class CartComponent implements OnInit {
           alert("Your cart is empty! Please buy some!");
           this.router.navigate(['/book-list']);
         }
-        this.cart.cartBooks.map(item => this.globalService.getBook(item.bookId).subscribe(data => item.book = data[0]));
+        this.cart.cartBooks.map(item => this.globalService.getBook(item.bookId).subscribe(data => {
+          data.map(item => item.bookImages[0].imageSrc = `${environment.api}/${item.bookImages[0].imageSrc}`);
+          item.book = data[0];
+        }));
         this.total = this.cart.totalBookPrice;
       });
       this.globalService.getAllPromotion().subscribe(data => {

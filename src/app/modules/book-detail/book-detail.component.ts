@@ -4,6 +4,7 @@ import { Book } from 'src/app/_models/book';
 import { Image } from 'src/app/_models/image';
 import { GlobalService } from 'src/app/_services/global.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-detail',
@@ -27,6 +28,7 @@ export class BookDetailComponent implements OnInit {
     this.globalService.getBook(this.id).subscribe(data => {
       this.bookDetail = data[0];
       this.image = this.bookDetail.bookImages;
+      this.image.map(item => item.imageSrc = `${environment.api}/${item.imageSrc}`);
     });
   }
 

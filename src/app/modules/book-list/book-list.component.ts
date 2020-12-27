@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from 'src/app/_models/book';
 import { Category } from 'src/app/_models/category';
+import { environment } from 'src/environments/environment';
 import { GlobalService } from '../../_services/global.service';
 declare var $: any;
 
@@ -38,6 +39,7 @@ export class BookListComponent implements OnInit {
       }); 
     });
     this.globalService.getBookList().subscribe(data => {
+      data.map(item => {if (item.bookImages.length) item.bookImages[0].imageSrc = `${environment.api}/${item.bookImages[0].imageSrc}`});
       this.bookDataFilter = this.bookDataOrigin = data;
       this.noBook = data.length;
       this.paging();
