@@ -22,7 +22,8 @@ export class CartComponent implements OnInit {
   address: string;
   selectedPromotion: Promotion;
   loyalPts: number;
-  listShipTwo: string[] = ['HCM', 'TG', 'LA', 'CT', 'VL'];
+  listShipTwo: string[] = ['HCM', 'TG', 'LA', 'CT', 'BT'];
+  freeship: boolean = false;
   constructor(private globalService: GlobalService,
     private router: Router) { }
 
@@ -41,11 +42,12 @@ export class CartComponent implements OnInit {
           item.book = data[0];
         }));
         this.total = this.cart.totalBookPrice;
+        this.freeship = (this.total >= 300);
+        this.checkAddress();
       });
       this.globalService.getAllPromotion().subscribe(data => {
         this.promotions = data;
         this.promotions = this.promotions.filter(item => !item.isDeleted);
-        console.log(this.promotions);
         
       });
       this.globalService.getGlobalInfo().subscribe(data => {
@@ -70,6 +72,8 @@ export class CartComponent implements OnInit {
 
   calculateTotal() {
     this.total = this.cart.cartBooks.reduce((x, item) => x + item.quantity*item.book.pricePerUnit, 0);
+    this.freeship = (this.total >= 300);
+    this.checkAddress();
   }
 
   updateCart() {
@@ -84,8 +88,13 @@ export class CartComponent implements OnInit {
   }
 
   checkAddress() {
-    if (this.listShipTwo.some(item => this.address.toLowerCase().includes(item.toLowerCase()))) this.shippingPrice = 2;
-    else this.shippingPrice = 5;
+    if (this.freeship) {
+      this.shippingPrice = 0;
+    }
+    else {
+      if (this.listShipTwo.some(item => this.address.toLowerCase().includes(item.toLowerCase()))) this.shippingPrice = 2;
+      else this.shippingPrice = 5;
+    }
   }
 
   choosePromotion() {

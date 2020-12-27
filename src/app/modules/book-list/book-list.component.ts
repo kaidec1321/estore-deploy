@@ -39,6 +39,7 @@ export class BookListComponent implements OnInit {
       }); 
     });
     this.globalService.getBookList().subscribe(data => {
+      data = data.filter(item => !item.deleted);
       data.map(item => {if (item.bookImages.length) item.bookImages[0].imageSrc = `${environment.api}/${item.bookImages[0].imageSrc}`});
       this.bookDataFilter = this.bookDataOrigin = data;
       this.noBook = data.length;
@@ -74,7 +75,7 @@ export class BookListComponent implements OnInit {
 
   filter() {
     this.bookDataFilter = this.bookDataOrigin.filter(item => (item.title && item.title.toLowerCase().includes(this.wordSearch.trim().toLowerCase())) || (item.author && item.author.toLowerCase().includes(this.wordSearch.trim().toLowerCase())) || (item.publisher && item.publisher.toLowerCase().includes(this.wordSearch.trim().toLowerCase())));
-    if (this.categoryFilter) this.bookDataFilter = this.bookDataOrigin.filter(item => item.categoryId == this.categoryFilter);
+    if (this.categoryFilter) this.bookDataFilter = this.bookDataFilter.filter(item => item.categoryId == this.categoryFilter);
     this.noBook = this.bookDataFilter.length;
     this.noPage = 1;
     this.paging();

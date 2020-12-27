@@ -46,7 +46,7 @@ export class BookDetailComponent implements OnInit {
 
   addToCart() {
     this.globalService.addToCart(this.id, this.quantity).subscribe(data => {
-      this.snackBar.open("Add to cart", "Checkout", {
+      this.snackBar.open("Added to cart", "Checkout", {
         duration: 4000
       });
 
