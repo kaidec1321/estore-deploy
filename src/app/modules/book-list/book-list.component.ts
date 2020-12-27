@@ -41,7 +41,7 @@ export class BookListComponent implements OnInit {
     this.globalService.getBookList().subscribe(data => {
       data = data.filter(item => !item.deleted);
       data.map(item => {
-        if (item.discount) item.actualPrice = item.pricePerUnit*(1 - item.discount);
+        if (item.discount) item.actualPrice = item.pricePerUnit*(1 - item.discount / 100.00);
       });
       data.map(item => {if (item.bookImages.length) item.bookImages[0].imageSrc = `${environment.api}/${item.bookImages[0].imageSrc}`});
       this.bookDataFilter = this.bookDataOrigin = data;
